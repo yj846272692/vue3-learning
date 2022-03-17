@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>基础API-computed()函数 </title>
+  </head>
+  <body>
+    <div id="app">
+
+      <p>{{ plusCount }}</p>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+
+    <script>
+      //导入reactive
+      const { createApp , ref ,computed } = Vue;
+      const App = {
+        setup() {
+          //创建一个ref响应式数据
+          const count = ref(1);
+          //根据count的值，会创建出一个响应式的计算属性 plusCount
+          //它会根据依赖的ref自动计算并返回一个新的ref
+          const plusCount = computed(() => 
+            count.value + 1
+            );
+          console.log(plusCount.value);//输出2
+          plusCount.value++;//error
+          return{
+            plusCount,
+          };
+        },
+      };
+
+      createApp(App).mount('#app');
+    </script>
+  </body>
+</html>
